@@ -50,9 +50,9 @@
                 $stmt->bind_param("sss", $sender, $subject, $message);
 
                 if ($stmt->execute()) {
-                    echo "Email stored in the database successfully";
+                    echo "Email stored successfully";
                 } else {
-                    echo "Error storing email in the database: " . $stmt->error;
+                    echo "Error in the database: " . $stmt->error;
                 }
 
                 $stmt->close();
@@ -66,7 +66,7 @@
     function registerUser($con, $email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        $stmt = $con->prepare("INSERT INTO `users` (`email`, `password`) VALUES ( '$email', '$hashedPassword')");
+        $stmt = $con->prepare("INSERT INTO `user` (`email`, `password`) VALUES ( '$email', '$hashedPassword')");
         $stmt->bind_param("ss", $email, $hashedPassword);
 
         if ($stmt->execute()) {
